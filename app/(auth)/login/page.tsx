@@ -3,18 +3,29 @@
 import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 import { Mail, Lock } from "lucide-react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faGoogle } from "@fortawesome/free-brands-svg-icons";
 import { faGithub } from "@fortawesome/free-brands-svg-icons";
+
 export default function LoginPage() {
+  const router = useRouter();
   const [formData, setFormData] = useState({ email: "", password: "" });
   const [rememberMe, setRememberMe] = useState(false);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    // Tambahkan logika autentikasi di sini
-    console.log("Logging in with:", formData, "Remember:", rememberMe);
+    const emailLower = formData.email.toLowerCase();
+    
+    // Redirect logic based on email pattern
+    if (emailLower.includes("pemkot") || emailLower === "admin@pemkot.go.id") {
+      router.push("/pemkot");
+    } else if (emailLower.includes("seller") || emailLower === "seller@umkm.com") {
+      router.push("/seller");
+    } else {
+      router.push("/");
+    }
   };
 
   return (
@@ -51,6 +62,19 @@ export default function LoginPage() {
           <p className="text-xs text-custom-muted">
             Masuk untuk menjelajahi & mendukung produk lokal terlengkap
           </p>
+        </div>
+
+        {/* Info Hint untuk Testing */}
+        <div className="p-3 bg-teal-50 dark:bg-teal-950/20 border border-teal-200 dark:border-teal-900 rounded-xl space-y-1.5 text-xs text-custom-muted">
+          <p className="font-bold text-custom-main flex items-center gap-1.5">
+            <span className="w-2 h-2 rounded-full bg-brand-primary inline-block"></span>
+            Panduan Akses Demo:
+          </p>
+          <ul className="list-disc pl-4 space-y-1 text-[10px]">
+            <li>Akun <strong>Pemkot</strong>: gunakan email <code className="bg-custom-ter px-1 py-0.5 rounded font-mono text-brand-primary font-bold">admin@pemkot.go.id</code></li>
+            <li>Akun <strong>Seller (UMKM)</strong>: gunakan email <code className="bg-custom-ter px-1 py-0.5 rounded font-mono text-brand-primary font-bold">seller@umkm.com</code></li>
+            <li>Kata sandi bebas (sembarang karakter).</li>
+          </ul>
         </div>
 
         {/* Form Login */}
