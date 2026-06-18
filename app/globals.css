@@ -1,26 +1,145 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
+@layer base {
+  /* ==========================================
+     LIGHT MODE THEME COLORS
+     ========================================== */
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --bg-primary: #ffffff;
+    --bg-secondary: #f9fafb;
+    --bg-tertiary: #f3f4f6;
+
+    --text-main: #1f2937;
+    --text-muted: #4b5563;
+    --text-inverse: #ffffff;
+
+    --brand-primary: #0f766e; /* Teal 700 */
+    --brand-secondary: #14b8a6; /* Teal 500 */
+    --brand-accent: #f59e0b; /* Amber 500 */
+
+    --card-bg: #ffffff;
+    --card-border: #e5e7eb;
+
+    --gradient-hero: linear-gradient(135deg, #0f766e 0%, #14b8a6 100%);
+  }
+
+  /* ==========================================
+     DARK MODE THEME COLORS
+     ========================================== */
+  [data-theme="dark"] {
+    --bg-primary: #111827;
+    --bg-secondary: #1f2937;
+    --bg-tertiary: #374151;
+
+    --text-main: #f9fafb;
+    --text-muted: #9ca3af;
+    --text-inverse: #111827;
+
+    --brand-primary: #14b8a6;
+    --brand-secondary: #2dd4bf;
+    --brand-accent: #fbbf24;
+
+    --card-bg: #1f2937;
+    --card-border: #374151;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+html {
+  scroll-behavior: smooth;
+  font-family: "Poppins", sans-serif;
+  background-color: var(--bg-primary);
+  color: var(--text-main);
+  transition:
+    background-color 0.3s ease,
+    color 0.3s ease;
+}
+
+/* Custom Utilities based on variables */
+.bg-custom-main {
+  background-color: var(--bg-primary);
+}
+.bg-custom-sec {
+  background-color: var(--bg-secondary);
+}
+.bg-custom-ter {
+  background-color: var(--bg-tertiary);
+}
+.bg-custom-card {
+  background-color: var(--card-bg);
+}
+.border-custom {
+  border-color: var(--card-border);
+}
+.text-custom-main {
+  color: var(--text-main);
+}
+.text-custom-muted {
+  color: var(--text-muted);
+}
+
+.bg-brand-primary {
+  background-color: var(--brand-primary);
+}
+.text-brand-primary {
+  color: var(--brand-primary);
+}
+.border-brand-primary {
+  border-color: var(--brand-primary);
+}
+
+/* Keyframe animations from pure CSS setup */
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+.animate-float {
+  animation: float 4s ease-in-out infinite;
+}
+
+.animate-float-slow {
+  animation: float 6s ease-in-out infinite;
+}
+
+/* Custom Infinite Marquee Animation */
+@keyframes marquee {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-marquee {
+  display: flex;
+  width: max-content;
+  animation: marquee 25s linear infinite;
+}
+
+/* Pause running animation when hovered */
+.animate-marquee:hover {
+  animation-play-state: paused;
+}
+
+@keyframes marquee-reverse {
+  0% {
+    transform: translateX(-50%);
+  }
+  100% {
+    transform: translateX(0%);
+  }
+}
+.animate-marquee-reverse {
+  display: flex;
+  width: max-content;
+  animation: marquee-reverse 25s linear infinite;
+}
+.animate-marquee-reverse:hover {
+  animation-play-state: paused;
 }
