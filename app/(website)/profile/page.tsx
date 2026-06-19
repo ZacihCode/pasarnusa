@@ -22,6 +22,9 @@ import {
   Navigation,
 } from "lucide-react";
 import Image from "next/image";
+import dynamic from "next/dynamic";
+
+const UMKMMap = dynamic(() => import("@/components/UMKMMap"), { ssr: false });
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 
@@ -53,6 +56,8 @@ interface UMKM {
   phone: string;
   mapX: number;
   mapY: number;
+  lat: number;
+  lng: number;
 }
 
 // ─── Data ─────────────────────────────────────────────────────────────────────
@@ -118,7 +123,9 @@ const UMKM_LIST: UMKM[] = [
     rating: 4.8,
     phone: "0812-3456-7890",
     mapX: 28,
-    mapY: 42
+    mapY: 42,
+    lat: -2.9904,
+    lng: 104.7262
   },
   {
     id: "umkm-2",
@@ -131,7 +138,9 @@ const UMKM_LIST: UMKM[] = [
     rating: 4.9,
     phone: "0813-9876-5432",
     mapX: 52,
-    mapY: 28
+    mapY: 28,
+    lat: -2.9634,
+    lng: 104.7521
   },
   {
     id: "umkm-3",
@@ -144,7 +153,9 @@ const UMKM_LIST: UMKM[] = [
     rating: 4.7,
     phone: "0821-4455-6677",
     mapX: 42,
-    mapY: 72
+    mapY: 72,
+    lat: -3.0032,
+    lng: 104.7645
   },
   {
     id: "umkm-4",
@@ -157,7 +168,9 @@ const UMKM_LIST: UMKM[] = [
     rating: 4.6,
     phone: "0852-1122-3344",
     mapX: 35,
-    mapY: 22
+    mapY: 22,
+    lat: -2.9234,
+    lng: 104.7182
   },
   {
     id: "umkm-5",
@@ -170,7 +183,9 @@ const UMKM_LIST: UMKM[] = [
     rating: 4.7,
     phone: "0819-5566-7788",
     mapX: 62,
-    mapY: 78
+    mapY: 78,
+    lat: -3.0189,
+    lng: 104.7924
   },
 ];
 
@@ -629,97 +644,17 @@ export default function ProfilePage() {
                   </div>
 
                   <div className="grid grid-cols-1 lg:grid-cols-12 gap-5 pt-2">
-                    {/* SVG Map (Left) */}
-                    <div className="lg:col-span-8 relative h-[380px] border border-custom bg-custom-sec rounded-2xl overflow-hidden flex items-center justify-center p-4">
-                      {/* Grid overlays */}
-                      <div className="absolute inset-0 bg-[linear-gradient(to_right,#8080800d_1px,transparent_1px),linear-gradient(to_bottom,#8080800d_1px,transparent_1px)] bg-[size:14px_24px] pointer-events-none"></div>
-
-                      <svg viewBox="0 0 500 300" className="w-full h-full text-custom-muted/20 opacity-95">
-                        {/* River Musi */}
-                        <path
-                          d="M 10 140 Q 150 120, 250 150 T 490 130"
-                          fill="none"
-                          stroke="var(--brand-primary)"
-                          strokeWidth="7"
-                          strokeOpacity="0.2"
-                          strokeDasharray="5 3"
-                        />
-                        {/* Ampera Bridge */}
-                        <line x1="240" y1="130" x2="240" y2="160" stroke="#f43f5e" strokeWidth="4" strokeLinecap="round" />
-                        <line x1="235" y1="130" x2="235" y2="160" stroke="#f43f5e" strokeWidth="1.5" />
-                        <line x1="245" y1="130" x2="245" y2="160" stroke="#f43f5e" strokeWidth="1.5" />
-
-                        {/* Clickable District Paths */}
-                        <path
-                          d="M 50 20 L 180 10 L 210 50 L 150 90 L 90 80 Z"
-                          fill="currentColor"
-                          className={`cursor-pointer transition-colors duration-150 ${selectedDistrict === "Sukarami" ? "text-brand-primary/10 stroke-brand-primary stroke-2" : "text-custom-muted/5 hover:text-brand-primary/5 stroke-custom/60"}`}
-                          onClick={() => setSelectedDistrict(selectedDistrict === "Sukarami" ? "Semua" : "Sukarami")}
-                        />
-                        <path
-                          d="M 210 50 L 300 40 L 320 95 L 230 110 L 195 80 Z"
-                          fill="currentColor"
-                          className={`cursor-pointer transition-colors duration-150 ${selectedDistrict === "Kemuning" ? "text-brand-primary/10 stroke-brand-primary stroke-2" : "text-custom-muted/5 hover:text-brand-primary/5 stroke-custom/60"}`}
-                          onClick={() => setSelectedDistrict(selectedDistrict === "Kemuning" ? "Semua" : "Kemuning")}
-                        />
-                        <path
-                          d="M 90 80 L 195 80 L 230 110 L 220 140 L 120 145 L 80 110 Z"
-                          fill="currentColor"
-                          className={`cursor-pointer transition-colors duration-150 ${selectedDistrict === "Ilir Barat I" ? "text-brand-primary/10 stroke-brand-primary stroke-2" : "text-custom-muted/5 hover:text-brand-primary/5 stroke-custom/60"}`}
-                          onClick={() => setSelectedDistrict(selectedDistrict === "Ilir Barat I" ? "Semua" : "Ilir Barat I")}
-                        />
-                        <path
-                          d="M 120 145 L 220 140 L 250 170 L 230 240 L 150 220 L 110 180 Z"
-                          fill="currentColor"
-                          className={`cursor-pointer transition-colors duration-150 ${selectedDistrict === "Seberang Ulu I" ? "text-brand-primary/10 stroke-brand-primary stroke-2" : "text-custom-muted/5 hover:text-brand-primary/5 stroke-custom/60"}`}
-                          onClick={() => setSelectedDistrict(selectedDistrict === "Seberang Ulu I" ? "Semua" : "Seberang Ulu I")}
-                        />
-                        <path
-                          d="M 250 170 L 360 160 L 390 230 L 290 260 L 230 240 Z"
-                          fill="currentColor"
-                          className={`cursor-pointer transition-colors duration-150 ${selectedDistrict === "Jakabaring" ? "text-brand-primary/10 stroke-brand-primary stroke-2" : "text-custom-muted/5 hover:text-brand-primary/5 stroke-custom/60"}`}
-                          onClick={() => setSelectedDistrict(selectedDistrict === "Jakabaring" ? "Semua" : "Jakabaring")}
-                        />
-                        <path
-                          d="M 360 160 L 470 145 L 490 210 L 420 250 L 390 230 Z"
-                          fill="currentColor"
-                          className={`cursor-pointer transition-colors duration-150 ${selectedDistrict === "Plaju" ? "text-brand-primary/10 stroke-brand-primary stroke-2" : "text-custom-muted/5 hover:text-brand-primary/5 stroke-custom/60"}`}
-                          onClick={() => setSelectedDistrict(selectedDistrict === "Plaju" ? "Semua" : "Plaju")}
-                        />
-                      </svg>
-
-                      {/* Buyer Home Location (Ilir Timur I - Center) */}
-                      <div style={{ left: "45%", top: "46%" }} className="absolute -translate-x-1/2 -translate-y-1/2 z-40">
-                        <span className="relative flex h-7 w-7 items-center justify-center">
-                          <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-60"></span>
-                          <span className="relative inline-flex rounded-full h-4.5 w-4.5 bg-blue-600 border-2 border-white dark:border-zinc-900 shadow-md items-center justify-center">
-                            <Home size={10} className="text-white" />
-                          </span>
-                        </span>
-                        <div className="absolute bottom-full mb-1 left-1/2 -translate-x-1/2 bg-blue-600 text-white px-2 py-0.5 rounded text-[8px] font-bold shadow whitespace-nowrap">
-                          📍 Rumah Anda
-                        </div>
-                      </div>
-
-                      {/* UMKM Location Pins */}
-                      {UMKM_LIST.filter((u) => {
-                        const mDistrict = selectedDistrict === "Semua" || u.kecamatan === selectedDistrict;
-                        const mCategory = categoryFilter === "Semua" || u.category === categoryFilter;
-                        const mSearch = u.name.toLowerCase().includes(searchQueryMap.toLowerCase());
-                        return mDistrict && mCategory && mSearch;
-                      }).map((umkm) => (
-                        <div
-                          key={umkm.id}
-                          style={{ left: `${umkm.mapX}%`, top: `${umkm.mapY}%` }}
-                          className="absolute -translate-x-1/2 -translate-y-1/2 group cursor-pointer z-30"
-                          onClick={() => setSelectedUMKM(umkm)}
-                        >
-                          <span className="relative flex h-6 w-6 items-center justify-center">
-                            <span className={`animate-ping absolute inline-flex h-full w-full rounded-full opacity-70 ${umkm.category === "Kuliner" ? "bg-orange-400" : umkm.category === "Fashion & Batik" ? "bg-purple-400" : "bg-teal-400"}`}></span>
-                            <span className={`relative inline-flex rounded-full h-3.5 w-3.5 border border-white dark:border-zinc-900 shadow-md ${umkm.category === "Kuliner" ? "bg-orange-500" : umkm.category === "Fashion & Batik" ? "bg-purple-500" : "bg-teal-500"}`}></span>
-                          </span>
-                        </div>
-                      ))}
+                    {/* Leaflet Map (Left) */}
+                    <div className="lg:col-span-8 relative h-[380px] border border-custom bg-custom-sec rounded-2xl overflow-hidden shadow-sm">
+                      <UMKMMap
+                        umkmList={UMKM_LIST}
+                        selectedUMKM={selectedUMKM}
+                        onSelectUMKM={setSelectedUMKM}
+                        selectedDistrict={selectedDistrict}
+                        onSelectDistrict={setSelectedDistrict}
+                        categoryFilter={categoryFilter}
+                        searchQuery={searchQueryMap}
+                      />
                     </div>
 
                     {/* Nearest shops list (Right) */}

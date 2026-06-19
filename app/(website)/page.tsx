@@ -9,6 +9,8 @@ import CTA from "@/components/CTA";
 import BackToTop from "@/components/BackToTop";
 import Testimoni from "@/components/Testimoni";
 import Rekomendasi from "@/components/Rekomendasi";
+import HomeMapSection from "@/components/HomeMapSection";
+
 export default function Home() {
   return (
     <div className="bg-custom-main text-custom-main min-h-screen relative overflow-x-hidden">
@@ -18,6 +20,7 @@ export default function Home() {
         <EventBanner />
         <AIDiscovery />
         <Rekomendasi />
+        <HomeMapSection />
         <KategoriProduk />
         <Products />
         <Partners />

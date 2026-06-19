@@ -23,6 +23,56 @@ import {
   MapPin,
   Navigation,
 } from "lucide-react";
+import dynamic from "next/dynamic";
+
+const UMKMMap = dynamic(() => import("@/components/UMKMMap"), { ssr: false });
+
+const SELLER_MAP_POINTS = [
+  {
+    id: "toko-anda",
+    name: "Toko Anda (Pempek Bu Yanti)",
+    owner: "Yanti Rahayu",
+    category: "Kuliner" as const,
+    kecamatan: "Ilir Barat I" as const,
+    address: "Jl. Bukit Besar No. 45, Bukit Lama, Kec. Ilir Barat I",
+    phone: "0812-3456-7890",
+    lat: -2.9904,
+    lng: 104.7262,
+  },
+  {
+    id: "sebaran-su1",
+    name: "Sebaran: Seberang Ulu I (25% Pesanan)",
+    owner: "Pelanggan",
+    category: "Kerajinan" as const,
+    kecamatan: "Seberang Ulu I" as const,
+    address: "Area Distribusi Seberang Ulu I - 120 Transaksi",
+    phone: "",
+    lat: -3.0032,
+    lng: 104.7645,
+  },
+  {
+    id: "sebaran-sukarami",
+    name: "Sebaran: Sukarami (10% Pesanan)",
+    owner: "Pelanggan",
+    category: "Fashion & Batik" as const,
+    kecamatan: "Sukarami" as const,
+    address: "Area Distribusi Sukarami - 48 Transaksi",
+    phone: "",
+    lat: -2.9234,
+    lng: 104.7182,
+  },
+  {
+    id: "sebaran-jakabaring",
+    name: "Sebaran: Jakabaring (20% Pesanan)",
+    owner: "Pelanggan",
+    category: "Kuliner" as const,
+    kecamatan: "Jakabaring" as const,
+    address: "Area Distribusi Jakabaring - 95 Transaksi",
+    phone: "",
+    lat: -3.0189,
+    lng: 104.7924,
+  }
+];
 
 interface Product {
   id: string;
@@ -36,6 +86,11 @@ interface Product {
 }
 
 export default function SellerDashboard() {
+  const [selectedDistrict, setSelectedDistrict] = useState<string>("Semua");
+  const [categoryFilter, setCategoryFilter] = useState<string>("Semua");
+  const [searchQueryMap, setSearchQueryMap] = useState("");
+  const [selectedUMKM, setSelectedUMKM] = useState<any | null>(null);
+
   const [products, setProducts] = useState<Product[]>([
     {
       id: "prod-1",
@@ -333,80 +388,18 @@ export default function SellerDashboard() {
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-          {/* Vector Map Mockup using clean SVG and pulsing pins */}
-          <div className="lg:col-span-2 relative h-64 border border-custom bg-custom-ter/30 rounded-2xl overflow-hidden flex items-center justify-center p-4">
-            {/* Grid overlay for map feel */}
-            <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:14px_24px]"></div>
-            
-            {/* Custom SVG Drawing of Palembang Map Representation */}
-            <svg viewBox="0 0 400 200" className="w-full h-full text-custom-muted/20 opacity-90 select-none">
-              {/* River Musi representation in the center */}
-              <path
-                d="M 10 100 Q 100 80, 200 110 T 390 100"
-                fill="none"
-                stroke="var(--brand-primary)"
-                strokeWidth="6"
-                strokeOpacity="0.3"
-                strokeDasharray="4 2"
-              />
-              <text x="30" y="80" className="fill-brand-primary/40 text-[9px] font-bold tracking-widest uppercase">Sungai Musi</text>
-              <text x="310" y="80" className="fill-brand-primary/40 text-[9px] font-bold tracking-widest uppercase">Jembatan Ampera</text>
-
-              {/* District contours */}
-              <path d="M 30 30 Q 100 40, 150 20 T 250 40 T 370 20" fill="none" stroke="currentColor" strokeWidth="1.5" strokeDasharray="3 3" />
-              <path d="M 40 170 Q 120 150, 180 180 T 280 160 T 360 170" fill="none" stroke="currentColor" strokeWidth="1.5" strokeDasharray="3 3" />
-            </svg>
-
-            {/* Pulsing indicator for Toko UMKM (Kec. Ilir Barat I) */}
-            <div className="absolute top-[35%] left-[30%] -translate-x-1/2 -translate-y-1/2 flex flex-col items-center">
-              <span className="relative flex h-4 w-4">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-                <span className="relative inline-flex rounded-full h-4 w-4 bg-emerald-500 border-2 border-white dark:border-zinc-900 shadow-md"></span>
-              </span>
-              <div className="mt-1 bg-zinc-950 text-white dark:bg-white dark:text-zinc-950 px-2 py-0.5 rounded-md text-[9px] font-black shadow-md flex items-center gap-1 select-none">
-                <span>🏪 Toko Anda (Bukit Besar)</span>
-              </div>
-            </div>
-
-            {/* Pins for customer/order distribution */}
-            <div className="absolute top-[60%] left-[55%] -translate-x-1/2 -translate-y-1/2 flex flex-col items-center group">
-              <div className="cursor-pointer flex flex-col items-center">
-                <MapPin size={16} className="text-brand-primary animate-bounce" />
-                <div className="bg-custom-card border border-custom px-1.5 py-0.5 rounded shadow-sm text-[8px] font-bold text-custom-main">
-                  📍 Seberang Ulu I (25%)
-                </div>
-              </div>
-            </div>
-
-            <div className="absolute top-[20%] left-[65%] -translate-x-1/2 -translate-y-1/2 flex flex-col items-center">
-              <div className="cursor-pointer flex flex-col items-center">
-                <MapPin size={16} className="text-brand-primary" />
-                <div className="bg-custom-card border border-custom px-1.5 py-0.5 rounded shadow-sm text-[8px] font-bold text-custom-main">
-                  📍 Sukarami (10%)
-                </div>
-              </div>
-            </div>
-
-            <div className="absolute top-[45%] left-[80%] -translate-x-1/2 -translate-y-1/2 flex flex-col items-center">
-              <div className="cursor-pointer flex flex-col items-center">
-                <MapPin size={16} className="text-brand-primary" />
-                <div className="bg-custom-card border border-custom px-1.5 py-0.5 rounded shadow-sm text-[8px] font-bold text-custom-main">
-                  📍 Jakabaring (20%)
-                </div>
-              </div>
-            </div>
-
-            <div className="absolute bottom-3 left-3 bg-custom-card/90 backdrop-blur-md px-3 py-1.5 rounded-xl border border-custom text-[9px] text-custom-muted space-y-0.5 select-none shadow-xs">
-              <p className="font-bold text-custom-main">Keterangan:</p>
-              <div className="flex items-center gap-1.5">
-                <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 border border-white dark:border-zinc-900 inline-block" />
-                <span>Titik Operasional UMKM</span>
-              </div>
-              <div className="flex items-center gap-1.5">
-                <span className="w-2.5 h-2.5 rounded-full bg-teal-500 border border-white dark:border-zinc-900 inline-block" />
-                <span>Sebaran Pesanan Pelanggan</span>
-              </div>
-            </div>
+          {/* Leaflet Map */}
+          <div className="lg:col-span-2 relative h-64 border border-custom bg-custom-ter/30 rounded-2xl overflow-hidden shadow-sm">
+            <UMKMMap
+              umkmList={SELLER_MAP_POINTS}
+              selectedUMKM={selectedUMKM}
+              onSelectUMKM={setSelectedUMKM}
+              selectedDistrict={selectedDistrict}
+              onSelectDistrict={setSelectedDistrict}
+              categoryFilter={categoryFilter}
+              searchQuery={searchQueryMap}
+              hideHomeMarker={true}
+            />
           </div>
 
           {/* Regional Sales details */}
