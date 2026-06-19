@@ -84,7 +84,7 @@ const RELATED: RelatedProduct[] = [
     price: 120000,
     rating: 4.9,
     sold: "2k+",
-    img: "https://lh3.googleusercontent.com/aida-public/AB6AXuCnVvKN5cQmE2AKrUfJQCysUHU6BhcAon-O7gF6p0P09n-SaBW60VSs_nmg7wBptiDnAIgSjfT407cPq1gMw8xHNl_9t119KfbTn3JuCyi2qkWQ07tCA7gXZ2TZgrTsceEGBbycK5HHmtm_krQdXikDr4IFZ816Sk7O_nFzw62rf_ymw9Pwvy5cFju3Rnx_TufOLdY4gZYSGhYVxHXpR8_CDARpqHV2q14Xe9XPaSm0PErSrAAuUOJa8T6xctddAFFoRVL9AwaA",
+    img: "https://down-id.img.susercontent.com/file/id-11134207-7ra0k-mb968wwsmdp541",
   },
 ];
 
@@ -136,7 +136,7 @@ export default function ProductDetailPage() {
           <div className="max-w-7xl mx-auto px-4 py-3 flex items-center gap-4">
             {/* Logo */}
             <a
-              href="#"
+              href="/"
               className="flex items-center gap-2 text-base font-medium text-zinc-900 dark:text-white"
             >
               <div className="w-10 h-10 rounded-xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-700 flex items-center justify-center overflow-hidden">
@@ -167,15 +167,19 @@ export default function ProductDetailPage() {
               />
             </div>
             <div className="flex items-center gap-2 ml-auto">
-              <button className="relative p-2 rounded-full hover:bg-custom-ter transition-colors">
-                <ShoppingCart size={20} className="text-custom-muted" />
-                <span className="absolute top-0.5 right-0.5 w-4 h-4 bg-brand-primary text-white text-[9px] font-bold rounded-full flex items-center justify-center">
-                  {cartCount}
-                </span>
-              </button>
-              <button className="p-2 rounded-full hover:bg-custom-ter transition-colors">
-                <User size={20} className="text-custom-muted" />
-              </button>
+              <a href="/shopcart">
+                <button className="relative p-2 rounded-full hover:bg-custom-ter transition-colors">
+                  <ShoppingCart size={20} className="text-custom-muted" />
+                  <span className="absolute top-0.5 right-0.5 w-4 h-4 bg-brand-primary text-white text-[9px] font-bold rounded-full flex items-center justify-center">
+                    {cartCount}
+                  </span>
+                </button>
+              </a>
+              <a href="/profile">
+                <button className="p-2 rounded-full hover:bg-custom-ter transition-colors">
+                  <User size={20} className="text-custom-muted" />
+                </button>
+              </a>
             </div>
           </div>
         </header>

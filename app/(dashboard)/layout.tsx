@@ -14,7 +14,6 @@ import {
   ShieldCheck,
   BarChart3,
   Megaphone,
-  UserCheck,
   LogOut,
   Sun,
   Moon,
@@ -24,7 +23,6 @@ import {
   X,
   ChevronRight,
   User,
-  ArrowLeftRight,
   MapPin,
   LineChart,
 } from "lucide-react";
@@ -115,27 +113,6 @@ export default function DashboardLayout({
             >
               <X size={18} />
             </button>
-          </div>
-
-          {/* Current Role Banner */}
-          <div className="px-4 py-3 border-b border-custom bg-custom-ter/50">
-            <div className="flex items-center justify-between">
-              <div>
-                <p className="text-[10px] text-custom-muted font-semibold uppercase tracking-wider">
-                  Panel Akses
-                </p>
-                <p className="text-xs font-bold text-custom-main">
-                  {isSeller ? "🏪 UMKM (Seller)" : "🏛️ Pemkot Palembang"}
-                </p>
-              </div>
-              <button
-                onClick={handleRoleToggle}
-                title="Ganti Mode Dashboard"
-                className="p-1.5 rounded-lg bg-brand-primary/10 text-brand-primary hover:bg-brand-primary hover:text-white transition-all duration-150"
-              >
-                <ArrowLeftRight size={14} />
-              </button>
-            </div>
           </div>
 
           {/* Sidebar Nav Items */}
@@ -241,15 +218,6 @@ export default function DashboardLayout({
               />
             </div>
 
-            {/* Quick Switcher Button on Desktop */}
-            <button
-              onClick={handleRoleToggle}
-              className="hidden md:flex items-center gap-1.5 px-3 py-1.5 rounded-full border border-custom bg-custom-ter hover:bg-custom-card transition text-xs font-semibold"
-            >
-              <ArrowLeftRight size={13} className="text-brand-primary" />
-              <span>Masuk Ke {isSeller ? "Panel Pemkot" : "Panel Seller"}</span>
-            </button>
-
             {/* Notifications */}
             <button className="relative p-2 rounded-full border border-custom hover:bg-custom-ter text-custom-muted transition">
               <Bell size={15} />
@@ -266,9 +234,7 @@ export default function DashboardLayout({
         </header>
 
         {/* Dashboard Content Page */}
-        <main className="p-4 sm:p-6 flex-grow overflow-y-auto">
-          {children}
-        </main>
+        <main className="p-4 sm:p-6 flex-grow overflow-y-auto">{children}</main>
       </div>
     </div>
   );

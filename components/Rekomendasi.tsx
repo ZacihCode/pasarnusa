@@ -192,9 +192,19 @@ export default function RecommendationsPage() {
                   img: "https://lh3.googleusercontent.com/aida-public/AB6AXuBA7Ar8Ofii7LQ71YR5f2QqS5QRxe9BDEV62LtDjycpkbLmf89Q1gESUY7hleYuJ1jKpuCpP4h_9c_Bqt_W-pPuNxo5xs554cOiXbPzw7u6xc3GtwsXJ7lexskcTzpBsz5E8r3w-BahSFvvr6pRdtEMRHSk--ECoDjAcEr0CDSVtH5pBYwJtr-sTEO2xpxnBZAffRzDFds_YYY7fqxybRL3ITDuz1UMqbWUUYTdzL2PWt4q4o0_2bNAH5cUbPEal-PywdNeOtrxIkM",
                 },
                 {
-                  name: "Lapis Legit Palembang Mini",
+                  name: "Songket Palembang Cantik Manis",
                   price: 45000,
-                  img: "https://asset.kompas.com/crops/vDnxqvmvtey4L00mxyjirZFQtYI=/0x365:1080x1085/1200x800/data/photo/2022/01/19/61e7ac147a315.jpg",
+                  img: "https://i.pinimg.com/originals/ab/b3/49/abb349c2673900b4bd5aad5d453bb180.jpg?nii=t",
+                },
+                {
+                  name: "Kopi Semendo Arabica 500g",
+                  price: 145000,
+                  img: "https://id-live-01.slatic.net/p/e0ccc31059b82af27e8c72ec9563fbe2.png",
+                },
+                {
+                  name: "Kelempang Super Pack",
+                  price: 70000,
+                  img: "https://p16-oec-sg.ibyteimg.com/tos-alisg-i-aphluv4xwc-sg/47479e345c924e2f869eba5483c999be~tplv-aphluv4xwc-white-pad-v1:250:250.jpeg",
                 },
               ].map((p) => (
                 <div
