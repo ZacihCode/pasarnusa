@@ -181,9 +181,11 @@ export default function CartPage() {
                 </span>
               )}
             </button>
-            <button className="p-2 rounded-full hover:bg-custom-ter transition-colors">
-              <User size={20} className="text-custom-muted" />
-            </button>
+            <a href="/profile">
+              <button className="p-2 rounded-full hover:bg-custom-ter transition-colors">
+                <User size={20} className="text-custom-muted" />
+              </button>
+            </a>
           </div>
         </div>
       </header>
@@ -191,7 +193,7 @@ export default function CartPage() {
       <main className="max-w-7xl mx-auto px-4 py-6">
         {/* Breadcrumb */}
         <nav className="flex items-center gap-1 text-xs text-custom-muted mb-6">
-          <a href="#" className="hover:text-brand-primary transition-colors">
+          <a href="/" className="hover:text-brand-primary transition-colors">
             Beranda
           </a>
           <ChevronRight size={12} />

@@ -148,7 +148,7 @@ export default function CheckoutPage() {
         <div className="max-w-7xl mx-auto px-4 py-3 flex items-center gap-4">
           {/* Logo */}
           <a
-            href="#"
+            href="/"
             className="flex items-center gap-2 text-base font-medium text-zinc-900 dark:text-white"
           >
             <div className="w-10 h-10 rounded-xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-700 flex items-center justify-center overflow-hidden">
@@ -180,9 +180,11 @@ export default function CheckoutPage() {
           </div>
           <div className="flex items-center gap-2 ml-auto">
             <div className="flex items-center gap-2">
-              <button className="p-2 rounded-full hover:bg-custom-ter transition-colors cursor-pointer">
-                <ShoppingCart size={20} className="text-custom-muted" />
-              </button>
+              <a href="/shopcart">
+                <button className="p-2 rounded-full hover:bg-custom-ter transition-colors cursor-pointer">
+                  <ShoppingCart size={20} className="text-custom-muted" />
+                </button>
+              </a>
               <a href="/profile">
                 <button className="p-2 rounded-full hover:bg-custom-ter transition-colors cursor-pointer">
                   <User size={20} className="text-custom-muted" />
@@ -200,7 +202,7 @@ export default function CheckoutPage() {
             Beranda
           </a>
           <ChevronRight size={12} />
-          <a href="/cart" className="hover:text-brand-primary">
+          <a href="/shopcart" className="hover:text-brand-primary">
             Keranjang
           </a>
           <ChevronRight size={12} />

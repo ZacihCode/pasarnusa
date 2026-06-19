@@ -493,15 +493,19 @@ export default function ProductListPage() {
           </div>
 
           <div className="flex items-center gap-2 ml-auto">
-            <button className="relative p-2 rounded-full hover:bg-custom-ter transition-colors">
-              <ShoppingCart size={20} className="text-custom-muted" />
-              <span className="absolute top-0.5 right-0.5 w-4 h-4 bg-brand-primary text-white text-[9px] font-bold rounded-full flex items-center justify-center">
-                {cartCount}
-              </span>
-            </button>
-            <button className="p-2 rounded-full hover:bg-custom-ter transition-colors">
-              <User size={20} className="text-custom-muted" />
-            </button>
+            <a href="/shopcart">
+              <button className="relative p-2 rounded-full hover:bg-custom-ter transition-colors">
+                <ShoppingCart size={20} className="text-custom-muted" />
+                <span className="absolute top-0.5 right-0.5 w-4 h-4 bg-brand-primary text-white text-[9px] font-bold rounded-full flex items-center justify-center">
+                  {cartCount}
+                </span>
+              </button>
+            </a>
+            <a href="/profile">
+              <button className="p-2 rounded-full hover:bg-custom-ter transition-colors">
+                <User size={20} className="text-custom-muted" />
+              </button>
+            </a>
             <button
               className="sm:hidden p-2 rounded-full hover:bg-custom-ter transition-colors"
               onClick={() => setMobileFilterOpen(true)}

@@ -11,7 +11,13 @@ interface UMKM {
   name: string;
   owner: string;
   category: "Kuliner" | "Fashion & Batik" | "Kerajinan";
-  kecamatan: "Ilir Barat I" | "Seberang Ulu I" | "Sukarami" | "Kemuning" | "Jakabaring" | "Plaju";
+  kecamatan:
+    | "Ilir Barat I"
+    | "Seberang Ulu I"
+    | "Sukarami"
+    | "Kemuning"
+    | "Jakabaring"
+    | "Plaju";
   address: string;
   distance: string;
   rating: number;
@@ -36,7 +42,7 @@ const UMKM_DATA: UMKM[] = [
     mapX: 28,
     mapY: 42,
     lat: -2.9904,
-    lng: 104.7262
+    lng: 104.7262,
   },
   {
     id: "umkm-2",
@@ -51,7 +57,7 @@ const UMKM_DATA: UMKM[] = [
     mapX: 52,
     mapY: 28,
     lat: -2.9634,
-    lng: 104.7521
+    lng: 104.7521,
   },
   {
     id: "umkm-3",
@@ -66,7 +72,7 @@ const UMKM_DATA: UMKM[] = [
     mapX: 42,
     mapY: 72,
     lat: -3.0032,
-    lng: 104.7645
+    lng: 104.7645,
   },
   {
     id: "umkm-4",
@@ -81,7 +87,7 @@ const UMKM_DATA: UMKM[] = [
     mapX: 35,
     mapY: 22,
     lat: -2.9234,
-    lng: 104.7182
+    lng: 104.7182,
   },
   {
     id: "umkm-5",
@@ -96,7 +102,7 @@ const UMKM_DATA: UMKM[] = [
     mapX: 62,
     mapY: 78,
     lat: -3.0189,
-    lng: 104.7924
+    lng: 104.7924,
   },
   {
     id: "umkm-6",
@@ -111,7 +117,7 @@ const UMKM_DATA: UMKM[] = [
     mapX: 33,
     mapY: 48,
     lat: -2.9774,
-    lng: 104.7512
+    lng: 104.7512,
   },
   {
     id: "umkm-7",
@@ -126,8 +132,8 @@ const UMKM_DATA: UMKM[] = [
     mapX: 78,
     mapY: 65,
     lat: -3.0076,
-    lng: 104.8143
-  }
+    lng: 104.8143,
+  },
 ];
 
 export default function HomeMapSection() {
@@ -137,15 +143,18 @@ export default function HomeMapSection() {
   const [selectedUMKM, setSelectedUMKM] = useState<UMKM | null>(null);
 
   const filteredUMKMs = UMKM_DATA.filter((u) => {
-    const mDistrict = selectedDistrict === "Semua" || u.kecamatan === selectedDistrict;
-    const mCategory = categoryFilter === "Semua" || u.category === categoryFilter;
-    const mSearch = u.name.toLowerCase().includes(searchQuery.toLowerCase()) || 
-                    u.address.toLowerCase().includes(searchQuery.toLowerCase());
+    const mDistrict =
+      selectedDistrict === "Semua" || u.kecamatan === selectedDistrict;
+    const mCategory =
+      categoryFilter === "Semua" || u.category === categoryFilter;
+    const mSearch =
+      u.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      u.address.toLowerCase().includes(searchQuery.toLowerCase());
     return mDistrict && mCategory && mSearch;
   });
 
   return (
-    <section id="peta" className="py-20 bg-custom-sec border-y border-custom">
+    <section id="peta" className="py-20 bg-custom-main border-y border-custom">
       <div className="max-w-7xl mx-auto px-4">
         {/* Section Header */}
         <div className="max-w-3xl mx-auto text-center mb-12 space-y-4">
@@ -157,7 +166,8 @@ export default function HomeMapSection() {
             Peta Lokasi Fisik UMKM Palembang
           </h2>
           <p className="text-sm text-custom-muted leading-relaxed">
-            Temukan sebaran lokasi toko fisik kuliner lokal, perajin kain songket, dan batik khas langsung di peta interaktif kota Palembang.
+            Temukan sebaran lokasi toko fisik kuliner lokal, perajin kain
+            songket, dan batik khas langsung di peta interaktif kota Palembang.
           </p>
         </div>
 
@@ -166,7 +176,10 @@ export default function HomeMapSection() {
           {/* Left: Search & Category Filter */}
           <div className="flex flex-wrap gap-2.5 items-center flex-grow">
             <div className="relative w-full sm:w-64">
-              <Search size={14} className="absolute left-3 top-1/2 -translate-y-1/2 text-custom-muted" />
+              <Search
+                size={14}
+                className="absolute left-3 top-1/2 -translate-y-1/2 text-custom-muted"
+              />
               <input
                 type="text"
                 placeholder="Cari toko atau produk..."
@@ -189,7 +202,15 @@ export default function HomeMapSection() {
 
           {/* Right: District Selection Pills */}
           <div className="flex flex-wrap gap-1.5 items-center">
-            {["Semua", "Ilir Barat I", "Seberang Ulu I", "Sukarami", "Kemuning", "Jakabaring", "Plaju"].map((dist) => (
+            {[
+              "Semua",
+              "Ilir Barat I",
+              "Seberang Ulu I",
+              "Sukarami",
+              "Kemuning",
+              "Jakabaring",
+              "Plaju",
+            ].map((dist) => (
               <button
                 key={dist}
                 onClick={() => setSelectedDistrict(dist)}
@@ -224,12 +245,21 @@ export default function HomeMapSection() {
           <div className="lg:col-span-4 flex flex-col justify-between h-[400px]">
             {/* Store Listing */}
             <div className="space-y-3 overflow-y-auto flex-grow pr-1.5">
-              <p className="font-bold text-[10px] text-custom-muted uppercase tracking-wider mb-2">Daftar Gerai Terdekat</p>
+              <p className="font-bold text-[10px] text-custom-muted uppercase tracking-wider mb-2">
+                Daftar Gerai Terdekat
+              </p>
               {filteredUMKMs.length === 0 ? (
                 <div className="text-center py-10 border border-dashed border-custom rounded-xl bg-custom-ter/20">
-                  <MapPin size={24} className="mx-auto text-custom-muted mb-2" />
-                  <p className="text-xs font-bold text-custom-main">Toko Tidak Ditemukan</p>
-                  <p className="text-[10px] text-custom-muted mt-0.5">Coba ubah kata kunci pencarian Anda.</p>
+                  <MapPin
+                    size={24}
+                    className="mx-auto text-custom-muted mb-2"
+                  />
+                  <p className="text-xs font-bold text-custom-main">
+                    Toko Tidak Ditemukan
+                  </p>
+                  <p className="text-[10px] text-custom-muted mt-0.5">
+                    Coba ubah kata kunci pencarian Anda.
+                  </p>
                 </div>
               ) : (
                 filteredUMKMs.map((umkm) => (
@@ -243,15 +273,22 @@ export default function HomeMapSection() {
                     }`}
                   >
                     <div className="flex justify-between items-start gap-1">
-                      <h4 className="font-bold text-custom-main text-xs truncate">{umkm.name}</h4>
+                      <h4 className="font-bold text-custom-main text-xs truncate">
+                        {umkm.name}
+                      </h4>
                       <span className="text-[9px] font-bold text-brand-primary bg-brand-primary/10 px-2 py-0.5 rounded-md flex-shrink-0">
                         {umkm.distance}
                       </span>
                     </div>
-                    <p className="text-[10px] text-custom-muted truncate mt-1">{umkm.address}</p>
+                    <p className="text-[10px] text-custom-muted truncate mt-1">
+                      {umkm.address}
+                    </p>
                     <div className="flex items-center gap-1.5 mt-2 text-[10px] text-custom-muted">
                       <span className="flex items-center text-amber-500 font-bold">
-                        <Star size={11} className="fill-current text-amber-500 mr-0.5" />
+                        <Star
+                          size={11}
+                          className="fill-current text-amber-500 mr-0.5"
+                        />
                         {umkm.rating}
                       </span>
                       <span>•</span>
@@ -274,11 +311,17 @@ export default function HomeMapSection() {
                     <span className="text-[8px] font-black uppercase text-brand-primary tracking-wider px-2 py-0.5 bg-brand-primary/10 rounded-md">
                       {selectedUMKM.category}
                     </span>
-                    <h5 className="font-bold text-custom-main text-sm mt-1.5">{selectedUMKM.name}</h5>
+                    <h5 className="font-bold text-custom-main text-sm mt-1.5">
+                      {selectedUMKM.name}
+                    </h5>
                   </div>
-                  <span className="text-[10px] font-semibold text-custom-muted">{selectedUMKM.distance} dari pusat acuan</span>
+                  <span className="text-[10px] font-semibold text-custom-muted">
+                    {selectedUMKM.distance} dari pusat acuan
+                  </span>
                 </div>
-                <p className="text-[10px] text-custom-muted leading-relaxed line-clamp-2">{selectedUMKM.address}</p>
+                <p className="text-[10px] text-custom-muted leading-relaxed line-clamp-2">
+                  {selectedUMKM.address}
+                </p>
                 <div className="grid grid-cols-2 gap-2 pt-1">
                   <button
                     onClick={() => {

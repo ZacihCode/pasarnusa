@@ -18,8 +18,6 @@ import {
   Compass,
   ShoppingCart,
   Store,
-  Building2,
-  Navigation,
 } from "lucide-react";
 import Image from "next/image";
 import dynamic from "next/dynamic";
@@ -49,7 +47,13 @@ interface UMKM {
   name: string;
   owner: string;
   category: "Kuliner" | "Fashion & Batik" | "Kerajinan";
-  kecamatan: "Ilir Barat I" | "Seberang Ulu I" | "Sukarami" | "Kemuning" | "Jakabaring" | "Plaju";
+  kecamatan:
+    | "Ilir Barat I"
+    | "Seberang Ulu I"
+    | "Sukarami"
+    | "Kemuning"
+    | "Jakabaring"
+    | "Plaju";
   address: string;
   distance: string;
   rating: number;
@@ -125,7 +129,7 @@ const UMKM_LIST: UMKM[] = [
     mapX: 28,
     mapY: 42,
     lat: -2.9904,
-    lng: 104.7262
+    lng: 104.7262,
   },
   {
     id: "umkm-2",
@@ -140,7 +144,7 @@ const UMKM_LIST: UMKM[] = [
     mapX: 52,
     mapY: 28,
     lat: -2.9634,
-    lng: 104.7521
+    lng: 104.7521,
   },
   {
     id: "umkm-3",
@@ -155,7 +159,7 @@ const UMKM_LIST: UMKM[] = [
     mapX: 42,
     mapY: 72,
     lat: -3.0032,
-    lng: 104.7645
+    lng: 104.7645,
   },
   {
     id: "umkm-4",
@@ -170,7 +174,7 @@ const UMKM_LIST: UMKM[] = [
     mapX: 35,
     mapY: 22,
     lat: -2.9234,
-    lng: 104.7182
+    lng: 104.7182,
   },
   {
     id: "umkm-5",
@@ -185,7 +189,7 @@ const UMKM_LIST: UMKM[] = [
     mapX: 62,
     mapY: 78,
     lat: -3.0189,
-    lng: 104.7924
+    lng: 104.7924,
   },
 ];
 
@@ -214,7 +218,7 @@ export default function ProfilePage() {
         <div className="max-w-7xl mx-auto px-4 py-3 flex items-center gap-4">
           {/* Logo */}
           <a
-            href="#"
+            href="/"
             className="flex items-center gap-2 text-base font-medium text-zinc-900 dark:text-white"
           >
             <div className="w-10 h-10 rounded-xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-700 flex items-center justify-center overflow-hidden">
@@ -246,9 +250,11 @@ export default function ProfilePage() {
           </div>
           <div className="flex items-center gap-2 ml-auto">
             <div className="flex items-center gap-2">
-              <button className="p-2 rounded-full hover:bg-custom-ter transition-colors cursor-pointer">
-                <ShoppingCart size={20} className="text-custom-muted" />
-              </button>
+              <a href="/shopcart">
+                <button className="p-2 rounded-full hover:bg-custom-ter transition-colors cursor-pointer">
+                  <ShoppingCart size={20} className="text-custom-muted" />
+                </button>
+              </a>
               <a href="/profile">
                 <button className="p-2 rounded-full hover:bg-custom-ter transition-colors cursor-pointer">
                   <User size={20} className="text-custom-muted" />
@@ -459,9 +465,13 @@ export default function ProfilePage() {
                               </p>
                             </div>
                             <div className="flex items-center gap-1 bg-custom-ter/50 px-2.5 py-1 rounded-xl border border-custom">
-                              <MapPin size={11} className="text-brand-primary animate-pulse" />
+                              <MapPin
+                                size={11}
+                                className="text-brand-primary animate-pulse"
+                              />
                               <span className="text-[9px] text-custom-muted font-bold">
-                                Toko: {order.sellerName} ({order.sellerDistrict})
+                                Toko: {order.sellerName} ({order.sellerDistrict}
+                                )
                               </span>
                             </div>
                           </div>
@@ -469,11 +479,15 @@ export default function ProfilePage() {
                         <div className="flex flex-col gap-2 justify-center flex-shrink-0">
                           {order.status === "selesai" ? (
                             <>
-                              <button className="flex items-center gap-1.5 px-4 py-2 rounded-xl bg-brand-primary text-white text-xs font-bold hover:opacity-90 transition-all">
-                                <RotateCcw size={12} /> Beli Lagi
-                              </button>
+                              <a href="/products">
+                                <button className="flex items-center gap-1.5 px-4 py-2 rounded-xl bg-brand-primary text-white text-xs font-bold hover:opacity-90 transition-all">
+                                  <RotateCcw size={12} /> Beli Lagi
+                                </button>
+                              </a>
                               <button
-                                onClick={() => handleViewShopOnMap(order.sellerName)}
+                                onClick={() =>
+                                  handleViewShopOnMap(order.sellerName)
+                                }
                                 className="px-4 py-2 rounded-xl border border-custom text-xs font-semibold text-custom-muted hover:border-brand-primary hover:text-brand-primary transition-colors flex items-center justify-center gap-1 cursor-pointer"
                               >
                                 <Compass size={12} /> Lihat di Peta
@@ -481,11 +495,15 @@ export default function ProfilePage() {
                             </>
                           ) : (
                             <>
-                              <button className="px-4 py-2 rounded-xl bg-orange-500 text-white text-xs font-bold hover:opacity-90 transition-all">
-                                Bayar Sekarang
-                              </button>
+                              <a href="/checkout">
+                                <button className="px-4 py-2 rounded-xl bg-orange-500 text-white text-xs font-bold hover:opacity-90 transition-all">
+                                  Bayar Sekarang
+                                </button>
+                              </a>
                               <button
-                                onClick={() => handleViewShopOnMap(order.sellerName)}
+                                onClick={() =>
+                                  handleViewShopOnMap(order.sellerName)
+                                }
                                 className="px-4 py-2 rounded-xl border border-custom text-xs font-semibold text-custom-muted hover:border-brand-primary hover:text-brand-primary transition-colors flex items-center justify-center gap-1 cursor-pointer"
                               >
                                 <Compass size={12} /> Lokasi Toko
@@ -596,7 +614,8 @@ export default function ProfilePage() {
                         SiWilayah - Temukan UMKM Terdekat
                       </h2>
                       <p className="text-xs text-custom-muted">
-                        Cari tahu lokasi fisik UMKM terverifikasi di sekeliling tempat tinggal Anda
+                        Cari tahu lokasi fisik UMKM terverifikasi di sekeliling
+                        tempat tinggal Anda
                       </p>
                     </div>
 
@@ -628,7 +647,15 @@ export default function ProfilePage() {
 
                   {/* District pills */}
                   <div className="flex flex-wrap gap-1.5">
-                    {["Semua", "Ilir Barat I", "Seberang Ulu I", "Sukarami", "Kemuning", "Jakabaring", "Plaju"].map((dist) => (
+                    {[
+                      "Semua",
+                      "Ilir Barat I",
+                      "Seberang Ulu I",
+                      "Sukarami",
+                      "Kemuning",
+                      "Jakabaring",
+                      "Plaju",
+                    ].map((dist) => (
                       <button
                         key={dist}
                         onClick={() => setSelectedDistrict(dist)}
@@ -660,11 +687,19 @@ export default function ProfilePage() {
                     {/* Nearest shops list (Right) */}
                     <div className="lg:col-span-4 flex flex-col justify-between h-[380px]">
                       <div className="space-y-2.5 overflow-y-auto flex-grow pr-1">
-                        <p className="font-bold text-[10px] text-custom-muted uppercase tracking-wider">Toko UMKM Terdekat</p>
+                        <p className="font-bold text-[10px] text-custom-muted uppercase tracking-wider">
+                          Toko UMKM Terdekat
+                        </p>
                         {UMKM_LIST.filter((u) => {
-                          const mDistrict = selectedDistrict === "Semua" || u.kecamatan === selectedDistrict;
-                          const mCategory = categoryFilter === "Semua" || u.category === categoryFilter;
-                          const mSearch = u.name.toLowerCase().includes(searchQueryMap.toLowerCase());
+                          const mDistrict =
+                            selectedDistrict === "Semua" ||
+                            u.kecamatan === selectedDistrict;
+                          const mCategory =
+                            categoryFilter === "Semua" ||
+                            u.category === categoryFilter;
+                          const mSearch = u.name
+                            .toLowerCase()
+                            .includes(searchQueryMap.toLowerCase());
                           return mDistrict && mCategory && mSearch;
                         }).map((umkm) => (
                           <div
@@ -673,14 +708,19 @@ export default function ProfilePage() {
                             className={`p-3 rounded-xl border cursor-pointer transition-all ${selectedUMKM?.id === umkm.id ? "border-brand-primary bg-brand-primary/5" : "border-custom bg-custom-ter/30 hover:bg-custom-ter/50"}`}
                           >
                             <div className="flex justify-between items-start gap-1">
-                              <h4 className="font-bold text-custom-main text-[11px] truncate">{umkm.name}</h4>
+                              <h4 className="font-bold text-custom-main text-[11px] truncate">
+                                {umkm.name}
+                              </h4>
                               <span className="text-[9px] font-bold text-brand-primary bg-brand-primary/10 px-1.5 py-0.5 rounded-md flex-shrink-0">
                                 {umkm.distance}
                               </span>
                             </div>
                             <div className="flex items-center gap-1.5 mt-1 text-[10px] text-custom-muted">
                               <span className="flex items-center text-amber-500 font-bold">
-                                <Star size={10} className="fill-current text-amber-500 mr-0.5" />
+                                <Star
+                                  size={10}
+                                  className="fill-current text-amber-500 mr-0.5"
+                                />
                                 {umkm.rating}
                               </span>
                               <span>•</span>
@@ -695,16 +735,26 @@ export default function ProfilePage() {
                         <div className="mt-3 p-3 bg-custom-card border border-brand-primary/30 rounded-xl space-y-2 shadow-sm animate-float-slow">
                           <div className="flex justify-between items-start">
                             <div>
-                              <p className="text-[8px] font-black uppercase text-brand-primary tracking-wider">{selectedUMKM.category}</p>
-                              <h5 className="font-bold text-custom-main text-xs">{selectedUMKM.name}</h5>
+                              <p className="text-[8px] font-black uppercase text-brand-primary tracking-wider">
+                                {selectedUMKM.category}
+                              </p>
+                              <h5 className="font-bold text-custom-main text-xs">
+                                {selectedUMKM.name}
+                              </h5>
                             </div>
-                            <span className="text-[9px] font-bold text-custom-muted">{selectedUMKM.distance} dari Anda</span>
+                            <span className="text-[9px] font-bold text-custom-muted">
+                              {selectedUMKM.distance} dari Anda
+                            </span>
                           </div>
-                          <p className="text-[10px] text-custom-muted line-clamp-2">{selectedUMKM.address}</p>
+                          <p className="text-[10px] text-custom-muted line-clamp-2">
+                            {selectedUMKM.address}
+                          </p>
                           <div className="grid grid-cols-2 gap-2 pt-1">
                             <button
                               onClick={() => {
-                                alert(`Membuka etalase produk dari ${selectedUMKM.name}`);
+                                alert(
+                                  `Membuka etalase produk dari ${selectedUMKM.name}`,
+                                );
                               }}
                               className="py-1.5 bg-brand-primary text-white text-[10px] font-bold rounded-lg hover:opacity-95 transition-all text-center flex items-center justify-center gap-1 cursor-pointer"
                             >

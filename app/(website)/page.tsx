@@ -10,7 +10,7 @@ import BackToTop from "@/components/BackToTop";
 import Testimoni from "@/components/Testimoni";
 import Rekomendasi from "@/components/Rekomendasi";
 import HomeMapSection from "@/components/HomeMapSection";
-
+import FAQSection from "@/components/Faq";
 export default function Home() {
   return (
     <div className="bg-custom-main text-custom-main min-h-screen relative overflow-x-hidden">
@@ -20,11 +20,12 @@ export default function Home() {
         <EventBanner />
         <AIDiscovery />
         <Rekomendasi />
-        <HomeMapSection />
         <KategoriProduk />
         <Products />
         <Partners />
+        <FAQSection />
         <Testimoni />
+        <HomeMapSection />
         <CTA />
       </main>
       <BackToTop />

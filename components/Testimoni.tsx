@@ -31,7 +31,7 @@ export default function Testimonials() {
   ];
 
   return (
-    <section className="py-20 bg-custom-main overflow-hidden border-b border-custom">
+    <section className="py-20 bg-custom-sec overflow-hidden border-b border-custom">
       {/* Section Header */}
       <div className="max-w-7xl mx-auto px-4 mb-12 text-center space-y-3">
         <span className="text-sm font-bold text-brand-primary tracking-widest uppercase inline-flex items-center justify-center gap-2 select-none">

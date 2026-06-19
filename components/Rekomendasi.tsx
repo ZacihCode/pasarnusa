@@ -88,12 +88,7 @@ export default function RecommendationsPage() {
         <section>
           <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-6">
             <div>
-              <div className="flex items-center gap-2 mb-2">
-                <Sparkles size={16} className="text-amber-500" />
-                <span className="text-xs font-bold uppercase tracking-widest text-amber-600">
-                  Smart Recommendation
-                </span>
-              </div>
+              <div className="flex items-center gap-2 mb-2"></div>
               <h1 className="text-2xl sm:text-3xl font-extrabold text-custom-main leading-tight">
                 Dipilih untukmu berdasarkan
                 <br className="hidden sm:block" />
@@ -199,7 +194,7 @@ export default function RecommendationsPage() {
                 {
                   name: "Lapis Legit Palembang Mini",
                   price: 45000,
-                  img: "https://lh3.googleusercontent.com/aida-public/AB6AXuAAC5jA7iyGEJHLLclWqRwtQELsKKxZBLyom2b4k94zsl4bAIgSjfT407cPq1gMw8xHNl_9t119KfbTn3JuCyi2qkWQ07tCA7gXZ2TZgrTsceEGBbycK5HHmtm_krQdXikDr4IFZ816Sk7O_nFzw62rf_ymw9Pwvy5cFju3Rnx_TufOLdY4gZYSGhYVxHXpR8_CDARpqHV2q14Xe9XPaSm0PErSrAAuUOJa8T6xctddAFFoRVL9AwaA",
+                  img: "https://asset.kompas.com/crops/vDnxqvmvtey4L00mxyjirZFQtYI=/0x365:1080x1085/1200x800/data/photo/2022/01/19/61e7ac147a315.jpg",
                 },
               ].map((p) => (
                 <div
@@ -267,7 +262,7 @@ export default function RecommendationsPage() {
                 {
                   name: "Pempek Kapal Selam",
                   price: 25000,
-                  img: "https://lh3.googleusercontent.com/aida-public/AB6AXuCLxtAYda_fKnxx_Sd3NLUKB3gwZ1r_MTt87BR5Ax5-39L7BugCZUkxtHuYR_OH-ek48Hr3QOdkAX8pZ0uJyKT9vjMdkUbGb8xyuI0pm7GXNnSYB3bdlHvjIOfnURGMV5KJ1p18adGJMAbIJP7DeplDzHVvicUuFY2vQIvuyPJcYaMseUBoGZ3_SeEB1OnJS9wuqY-HOSRykfhH9d2C25eNWC2tZlk7EJV2A99cQQfIfkabrvp7sFaInrsNPWEM7Ig33EtNabnXj6w",
+                  img: "https://awsimages.detik.net.id/community/media/visual/2021/05/20/pempek-kapal-selam_169.jpeg?w=600&q=90",
                 },
                 {
                   name: "Kemplang Super Pack",
